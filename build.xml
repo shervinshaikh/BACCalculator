@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project default="compile">
+
+  <!-- build.xml for ChoicePoints2, S12, CS56
+       name: Ramon Rovirosa and Shervin Shaikh-->
+
+  <property environment="env"/> <!-- load the environment variables --> 
+  <property name="webRoot" value="${env.HOME}/public_html/" />
+  <property name="webBaseURL" value="http://www.cs.ucsb.edu/${env.USER}/" />
+ 
+  <property name="course" value="cs56" />
+  <property name="quarter" value="S12" />
+  <property name="issueNum" value="0000823" />
+  <property name="mainClass" value="edu.ucsb.cs56.S12.shervinater.cp3.BACCalculatorActivity" />
+ 
+  <property name="projectName" value="${course}_${quarter}_${issueNum}" />
+  <property name="projectPath" value="${course}/${quarter}/issues/${issueNum}" />
+  <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" /> 
+  <property name="javadocURL" value="${webBaseUrl}/${projectPath}/javadoc" /> 
+
+  <property name="jwsDest" value="${webRoot}/${projectPath}/jws" /> 
+  <property name="jwsURL" value="${webBaseUrl}/${projectPath}/jws" /> 
+
+  <property name="fullPkg" value="edu.ucsb.cs56.S12.shervinater.${projectName}" />
+  
+  <path id="project.class.path">
+    <pathelement location="build"/>
+    <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+  </path>
+
+
+
+ <target name="javadoc" description="Creates the javadoc"> 
+   <delete dir="javadoc" quiet="true" /> 
+   <javadoc  destdir="javadoc" author="true" version="true" use="true" >  
+      <fileset dir="src" includes="**/*.java"/>  
+      <classpath refid="project.class.path" />
+   </javadoc>
+   <!-- delete the old javadoc -->
+   <delete quiet="true" dir="${javadocDest}" /> 
+   <!-- copy everything you just made to the javadoc destination, and then make it readable --> 
+   <copy todir="${javadocDest}" > 
+     <fileset dir="javadoc"/> 
+   </copy>  
+   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" /> 
+   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" /> 
+   <echo>Javadoc deployed to ${javadocURL}</echo> 
+ </target>
+
+
+
+ <target name="download" description="Creates compressed file of the BAC Calculator files"> 
+   <delete quiet="true"> 
+     <fileset dir="temp" includes="**/*" />  
+     <fileset dir="download" includes="**/*" />  
+   </delete> 
+   <mkdir dir="download" /> 
+   <mkdir dir="temp" />  
+   <mkdir dir="temp/${projectName}" /> 
+   <copy todir="temp/${projectName}"> 
+     <fileset dir="." 
+	      excludes="build/**, javadoc/**, **/*~, temp/**, download/**"/> 
+   </copy> 
+
+   <tar destfile="temp/${projectName}.tar"
+	basedir="temp"
+	includes="${projectName}/**" />
+   <gzip zipfile="download/${projectName}.tgz" 
+	 src="temp/${projectName}.tar" /> 
+   <zip destfile="download/${projectName}.zip"
+	basedir="temp"
+	includes="${projectName}/**"/> 
+   <delete quiet="true"> 
+     <fileset dir="temp" includes="**/*"/>  
+   </delete> 
+ </target> 
+
+
+  <target name="clean" description="Cleans up the executible files">
+    <delete failonerror="false" verbose="true">
+      <fileset dir="build" includes="**/*.class"/>
+    </delete>
+    <delete dir="javadoc" quiet="true" />
+    <delete dir="download" quiet="true" />
+    <delete dir="dist" quiet="true" />
+    <delete dir="temp" quiet="true" />
+  </target>
+
+ 
+ <target name="publish" depends="download, javadoc" description="Publishes everything to the web">
+   <mkdir dir="${webRoot}/${projectPath}" />
+   <delete dir="${webRoot}/${projectPath}/browse" />
+   <mkdir dir="${webRoot}/${projectPath}/browse" />
+   <delete dir="${webRoot}/${projectPath}/download" />
+   <mkdir dir="${webRoot}/${projectPath}/download" />
+   <copy file="html/index.html" todir="${webRoot}/${projectPath}"/>
+   <copy todir="${webRoot}/${projectPath}/download" > 
+     <fileset dir="download"/> 
+   </copy> 
+   <copy file="build.xml" todir="${webRoot}/${projectPath}/browse"/>
+     <copy file="project.properties" todir="${webRoot}/${projectPath}/browse"/>
+     <copy file="AndroidManifest.xml" todir="${webRoot}/${projectPath}/browse"/>
+     <copy file="shervin's keystore" todir="${webRoot}/${projectPath}/browse"/>
+   <copy todir="${webRoot}/${projectPath}/browse/src" > 
+     <fileset dir="src"/> 
+   </copy> 
+   <copy todir="${webRoot}/${projectPath}/browse/res">
+     <fileset dir="res"/>
+   </copy>
+   <copy todir="${webRoot}/${projectPath}/browse/gen">
+     <fileset dir="gen"/>
+   </copy>
+   <copy todir="${webRoot}/${projectPath}/download/">
+     <fileset dir="apk"/>
+   </copy>
+   <chmod dir="${webRoot}/${projectPath}" 
+	  perm="755" type="both" includes="**/*"/>
+   <echo>Project published to ${webBaseUrl}/${projectPath}</echo> 
+ </target>
+ 
+
+</project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Fill out the fields please!</string>
+    <string name="app_name">BAC Calculator</string>
+    <string name="hours">hours</string>
+    <string name="weight">pounds (lb)</string>
+    <string name="submit">Submit</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="beer">Number of Beers</string>
+    <string name="wine">Cups of Wine</string>
+    <string name="hard">Shots of Liquor</string>
+    <string name="title">Calculate your BAC!!</string>
+    <string name="weightField">Enter your weight:</string>
+    <string name="hoursField">Number of hours drinking:</string>
+    <string name="credit">Created by: Shervin Shaikh and Ramon Rovirosa</string>
+    
+    <string-array name="numbers">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+    
+</resources>

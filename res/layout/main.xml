@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/topBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+
+    <TextView
+        android:id="@+id/hoursLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hoursField"
+        />
+
+    <EditText
+        android:id="@+id/hoursF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" 
+        android:hint= "@string/hours" 
+        android:inputType="phone"
+        />
+
+    <TextView
+        android:id="@+id/weightLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weightField" />
+
+    <EditText
+        android:id="@+id/weightF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" 
+        android:hint= "@string/weight" 
+        android:inputType="phone"
+        >
+
+        <requestFocus />
+    </EditText>
+
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:id="@+id/radioGroupSex"
+    	>
+            
+        <RadioButton
+            android:id="@+id/radioMale"
+           	android:layout_width="wrap_content"
+           	android:layout_height="wrap_content"
+            android:text="@string/male" 
+            android:checked="true"
+        />
+
+        <RadioButton
+        	android:id="@+id/radioFemale"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/female" 
+       	/>
+
+	</RadioGroup>
+
+
+
+    <Spinner
+        android:id="@+id/beerCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/numbers"
+        android:prompt="@string/beer"
+         />
+
+    <Spinner
+        android:id="@+id/wineCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:entries="@array/numbers"
+        android:prompt="@string/wine"
+        />
+
+    <Spinner
+        android:id="@+id/hardCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:entries="@array/numbers"
+        android:prompt="@string/hard"
+        />
+    
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit" />
+
+    <TextView
+        android:id="@+id/credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/credit"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>
